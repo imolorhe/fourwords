@@ -2,7 +2,6 @@ package fourwords
 
 import scala.collection.mutable
 
-
 /**
   * Maps the provided area and unit area to generated fourwords
   *
@@ -21,21 +20,28 @@ class Mapper(x: Int = 0, y: Int = 0, w: Int = 100, h: Int = 100, uw: Int = 5, uh
   for(i <- 0 until num_rows){
     // j specifies the current column (x-axis)
     for(j <- 0 until num_cols){
-      var curEntry = (WordsGenerator.getWords, (uw * j, uh * i))
+      var curEntry = (WordsGenerator.getWordX, (uw * j, uh * i))
       map += curEntry
     }
   }
 
-  println("Total mappings required: ", num_rows * num_cols)
-  println("Total mappings provided: ", map.size)
+  println(s"Total mappings required: ${num_rows * num_cols}")
+  println(s"Total mappings provided: ${map.size}")
+  println(s"Total mappings possible: ${WordsGenerator.maxWordX}")
 
-  def searchWords(words: (String, String, String, String)) = map.find(_._1 == words)
+  def searchWordX(wordX: (String, String, String, String)): Option[((String, String, String, String), (Int, Int))] = map.find(_._1 == wordX)
 
-  def searchPoint(point: (Int, Int)) = {
-//    Subtract the modulo to get the point which was used in mapping
+  def searchPoint(point: (Int, Int)): Option[((String, String, String, String), (Int, Int))] = {
+    // Subtract the modulo to get the point which was used in mapping
+    // Round down to the nearest mapped point
     val curPoint = (point._1 - point._1 % uw, point._2 - point._2 % uh)
     map.find(_._2 == curPoint)
   }
 
-//  println(map)
+  def humanFriendly(mapItem: Option[((String, String, String, String), (Int, Int))]): String = {
+    mapItem match {
+      case Some(s) => s._1.productIterator.mkString(".")
+      case None => ""
+    }
+  }
 }

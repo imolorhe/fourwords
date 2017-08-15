@@ -4,10 +4,8 @@ object Main extends App{
 
   Console println "***** FOURWORDS *****"
 
-//  println(WordsGenerator.getWords)
-
   val mapper = new Mapper()
 
-  println(mapper.searchWords(("man", "boy", "girl", "woman")))
-  println(mapper.searchPoint((0, 93)))
+  println(mapper.humanFriendly(mapper.searchWordX(("man", "boy", "girl", "woman"))))
+  println(mapper.humanFriendly(mapper.searchPoint((43, 93))))
 }
