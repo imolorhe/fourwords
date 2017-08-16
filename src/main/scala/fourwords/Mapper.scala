@@ -14,6 +14,7 @@ class Mapper(x: Int = 0, y: Int = 0, w: Int = 100, h: Int = 100, uw: Int = 5, uh
   val num_rows: Int = h / uh
   val num_cols: Int = w / uw
 
+  // Stores the mappings
   var map: mutable.HashMap[(String, String, String, String), (Int, Int)] = new mutable.HashMap[(String, String, String, String), (Int, Int)]()
 
   // i specifies the current row (y-axis)
@@ -44,4 +45,10 @@ class Mapper(x: Int = 0, y: Int = 0, w: Int = 100, h: Int = 100, uw: Int = 5, uh
       case None => ""
     }
   }
+
+  def getMappingsDbSequence: Seq[(Int, Float, Float, String)] = map.map(v => {
+    (0, v._2._1.toFloat, v._2._2.toFloat, humanFriendly(Option(v)))
+  }).toSeq
+
+  def getMappings: mutable.HashMap[(String, String, String, String), (Int, Int)] = map
 }
