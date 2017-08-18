@@ -69,8 +69,8 @@ object Main extends App{
   // Setting parameters based on Lagos' location
   val startX = 2.71199
   val endX = 4.34997
-  val startY = -6.70552
-  val endY = -6.37569
+  val startY = 6.37569
+  val endY = 6.70552
   val unitWidth = 0.001
   val unitHeight = 0.001
   val mappingConfig = Map[String, Double](
